@@ -1,10 +1,10 @@
-<app-header></app-header>
+<app-header (sendOption)="ChangePage($event)"></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-recipes></app-recipes>
+      <app-recipes *ngIf="menuShowed === 2"></app-recipes>
       <hr>
-      <app-shopping-list></app-shopping-list>
+      <app-shopping-list *ngIf="menuShowed === 3"></app-shopping-list>
     </div>
   </div>
 </div>
