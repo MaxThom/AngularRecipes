@@ -1,7 +1,10 @@
 import {Recipe} from './recipe.model';
 import {Ingredient} from '../shared/ingredient.model';
+import { element } from 'protractor';
+import { Subject } from 'rxjs/Subject';
 
 export class RecipeService {
+  refreshRecipe = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe('Tomato Sauce', 'Tomato Sauce made from an italian mamamia', 'http://www.seriouseats.com/recipes/assets_c/2014/09/20140919-easy-italian-american-red-sauce-vicky-wasik-19-thumb-1500xauto-411319.jpg',
@@ -12,14 +15,29 @@ export class RecipeService {
               [new Ingredient('French Fries', 100), new Ingredient('Cheese (gram)', 300), new Ingredient('BBQ Sauce (ml)', 500)])
   ];
 
-  constructor() {
-
-  }
+  constructor() { }
 
   public GetRecipes() { return this.recipes.slice(); }
 
   public GetRecipe(id: number): Recipe {
     return this.recipes[id];
   }
+
+  public AddNewRecipe(element: Recipe): void {
+    this.recipes.push(element);
+
+    this.refreshRecipe.next(this.recipes);
+  }
+
+  public UpdateRecipe(id: number, element: Recipe): void {
+    this.recipes[id] = element;
+    this.refreshRecipe.next(this.recipes);
+  }
+
+  public DeleteRecipe(id: number): void {
+    this.recipes.splice(id, 1);
+    this.refreshRecipe.next(this.recipes);
+  }
+
 
 }

@@ -1,3 +1,62 @@
-<p>
-  recipe-edit works!
-</p>
+<div class="row moveUp">
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h3>{{ editMode ? 'Edit Recipe' : 'New Recipe' }}</h3>
+    <hr>
+    <form [formGroup]="recipeForm" (ngSubmit)="OnRecipeFormSubmit()">
+      <button class="btn btn-primary" type="submit" [disabled]="!recipeForm.valid">Save</button>
+      <button class="btn btn-danger" type="button" (click)="OnRecipeFormCancel()">Cancel</button>
+      <span *ngIf="!recipeForm.valid && recipeForm.touched" class="help-block errorMessage">Please enter valid inputs !</span>
+
+      <div class="form-group">
+        <label for="name">Recipe's Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+        <span *ngIf="!recipeForm.get('name').valid && recipeForm.get('name').touched" class="help-block errorMessage">
+          <span *ngIf="recipeForm.hasError('required', 'name')">Please enter a name !</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea rows="3" id="description" class="form-control" formControlName="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="imagePath">Image URL</label>
+        <input type="text" id="imagePath" class="form-control" formControlName="imagePath" #imagePath>
+        <span *ngIf="!recipeForm.get('imagePath').valid && recipeForm.get('imagePath').touched" class="help-block errorMessage">
+          <span *ngIf="recipeForm.hasError('required', 'imagePath')">Please enter a image URL !</span>
+        </span>
+        <img [src]="imagePath.value" alt="" class="img-responsive" style="">
+      </div>
+      <div class="col-xs-12" formArrayName="ingredients">
+        <div class="row" *ngIf="GetIngredientsControls()?.length > 0">
+          <div class="form-group col-xs-8">
+            <label>Ingredient Name</label>
+          </div>
+          <div class="form-group col-xs-2">
+            <label>Amount</label>
+          </div>
+          <div class="form-group col-xs-2">
+            <label>Delete</label>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;" *ngFor="let ingCtrl of GetIngredientsControls(); let i = index" [formGroupName]="i">
+          <span *ngIf="!recipeForm?.valid && recipeForm?.touched" class="help-block errorMessage">
+            <span *ngIf="recipeForm.hasError('required', 'ingredients.' + i + '.name')">Please enter a name!</span>
+            <span *ngIf="recipeForm.hasError('required', 'ingredients.' + i + '.amount')">Please enter an amount !</span>
+          </span>
+          <div class="col-xs-8">
+            <input type="text" id="name" class="form-control" formControlName="name">
+          </div>
+          <div class="col-xs-2">
+            <input type="number" id="amount" class="form-control" formControlName="amount">
+          </div>
+          <div class="col-xs-2">
+            <button class="btn btn-danger" type="button" id="delete" (click)="DeleteIngredient(i)">X</button>
+          </div>
+        </div>
+        <button class="btn btn-success" type="button" (click)="OnAddIngredient()">Add Ingredient</button>
+      </div>
+    </form>
+  </div>
+</div>

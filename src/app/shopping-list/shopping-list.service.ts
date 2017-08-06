@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
+  ingredientSelected = new Subject<number>();
 
   private ingredients: Ingredient[] = [];
 
@@ -11,21 +12,31 @@ export class ShoppingListService {
   }
   GetIngredientList(): Ingredient[] { return this.ingredients.slice(); }
 
+  GetIngredient(id: number): Ingredient { return this.ingredients.slice(id, id + 1)[0]; }
+
   AddIngredient(element: Ingredient): void  {
-    this.ingredients.push(element);
-    this.ingredientsChanged.next(this.ingredients);
+    this.AddIng(element);
   }
 
   AddListIngredients(list: Ingredient[]): void {
-
     for (let ing of list)
     {
-      let temp: Ingredient = this.ingredients.find(x => x.name === ing.name);
-      if (temp == null)
-        this.ingredients.push(ing);
-      else
-        temp.amount += ing.amount;
+      this.AddIng(ing);
     }
+  }
+
+  DeleteIngredient(id: number): void {
+    this.ingredients.splice(id, 1);
+    this.ingredientsChanged.next(this.ingredients);
+  }
+
+  private AddIng(element: Ingredient): void {
+
+    let temp: Ingredient = this.ingredients.find(x => x.name === element.name);
+    if (temp == null)
+      this.ingredients.push(element);
+    else
+      temp.amount += element.amount;
 
     this.ingredientsChanged.next(this.ingredients);
   }
