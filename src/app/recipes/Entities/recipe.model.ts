@@ -1,4 +1,4 @@
-import {Ingredient} from '../shared/ingredient.model';
+import {Ingredient} from '../../shared/ingredient.model';
 /**
  * Created by maxth on 2017-06-17.
  */

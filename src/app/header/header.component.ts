@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MenuOptions} from '../shared/enums';
-
+import { RecipeStorageService } from '../recipes/Entities/recipe-storage.service';
+import { Response } from '@angular/http';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,12 +10,27 @@ import {MenuOptions} from '../shared/enums';
 export class HeaderComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(private recipeStorageService: RecipeStorageService) { }
 
   ngOnInit() {
 
   }
 
+  OnSaveData(): void {
+    this.recipeStorageService.SaveData()
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+  }
+
+  OnFetchData(): void {
+    this.recipeStorageService.FetchData();
+  }
 
 }
 
