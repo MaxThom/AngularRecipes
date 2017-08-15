@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MenuOptions} from '../shared/enums';
-import { RecipeStorageService } from '../recipes/Entities/recipe-storage.service';
+import { RecipeStorageService } from '../recipes/recipe-entities/recipe-storage.service';
 import { Response } from '@angular/http';
 @Component({
   selector: 'app-header',

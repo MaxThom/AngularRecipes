@@ -7,6 +7,8 @@ import { Recipe } from './recipe.model';
 @Injectable()
 export class RecipeStorageService {
 
+  public firstLoad: boolean = false;
+
   constructor(private http: Http, private recipeService: RecipeService) {
 
   }

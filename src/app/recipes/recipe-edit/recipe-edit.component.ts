@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Recipe } from '../Entities/recipe.model';
+import { Recipe } from '../recipe-entities/recipe.model';
 import { forEach } from '@angular/router/src/utils/collection';
-import { RecipeService } from '../Entities/recipe.service';
+import { RecipeService } from '../recipe-entities/recipe.service';
 import { Ingredient } from '../../shared/ingredient.model';
 
 @Component({

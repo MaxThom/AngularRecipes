@@ -14,9 +14,9 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipeService } from 'app/recipes/Entities/recipe.service';
+import { RecipeService } from 'app/recipes/recipe-entities/recipe.service';
 import { HttpModule } from '@angular/http';
-import { RecipeStorageService } from './recipes/Entities/recipe-storage.service';
+import { RecipeStorageService } from './recipes/recipe-entities/recipe-storage.service';
 
 @NgModule({
   declarations: [
