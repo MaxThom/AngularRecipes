@@ -2,7 +2,10 @@ import {Recipe} from './recipe.model';
 import {Ingredient} from '../../shared/ingredient.model';
 import { element } from 'protractor';
 import { Subject } from 'rxjs/Subject';
+import { AuthService } from '../../auth/auth.service';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class RecipeService {
   refreshRecipe = new Subject<Recipe[]>();
 
@@ -17,7 +20,7 @@ export class RecipeService {
   //             [new Ingredient('French Fries', 100), new Ingredient('Cheese (gram)', 300), new Ingredient('BBQ Sauce (ml)', 500)])
   // ];
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   public GetRecipes() { return this.recipes.slice(); }
 
@@ -37,8 +40,10 @@ export class RecipeService {
   }
 
   public DeleteRecipe(id: number): void {
-    this.recipes.splice(id, 1);
-    this.refreshRecipe.next(this.recipes);
+    if (this.authService.IsAuthenticated()) {
+      this.recipes.splice(id, 1);
+      this.refreshRecipe.next(this.recipes);
+    }
   }
 
   public UpdateAllRecipes(data: Recipe[]): void {

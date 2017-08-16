@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MenuOptions} from '../shared/enums';
 import { RecipeStorageService } from '../recipes/recipe-entities/recipe-storage.service';
 import { Response } from '@angular/http';
+import { AuthService } from '../auth/auth.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,7 +12,7 @@ import { Response } from '@angular/http';
 export class HeaderComponent implements OnInit {
 
 
-  constructor(private recipeStorageService: RecipeStorageService) { }
+  constructor(private recipeStorageService: RecipeStorageService, private authService: AuthService) { }
 
   ngOnInit() {
 
@@ -32,5 +34,8 @@ export class HeaderComponent implements OnInit {
     this.recipeStorageService.FetchData();
   }
 
+  LogOut(){
+    this.authService.LogOut();
+  }
 }
 
