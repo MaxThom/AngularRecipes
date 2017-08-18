@@ -1,8 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MenuOptions} from '../shared/enums';
-import { RecipeStorageService } from '../recipes/recipe-entities/recipe-storage.service';
+import { RecipeStorageService } from '../../recipes/recipe-entities/recipe-storage.service';
 import { Response } from '@angular/http';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +31,10 @@ export class HeaderComponent implements OnInit {
 
   OnFetchData(): void {
     this.recipeStorageService.FetchData();
+  }
+
+  IsAuthenticated(): boolean {
+    return this.authService.IsAuthenticated();
   }
 
   LogOut(){
