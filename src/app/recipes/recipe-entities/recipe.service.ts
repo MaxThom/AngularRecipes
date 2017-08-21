@@ -25,7 +25,7 @@ export class RecipeService {
   public GetRecipes() { return this.recipes.slice(); }
 
   public GetRecipe(id: number): Recipe {
-    return this.recipes[id];
+    return this.recipes.slice(id, id + 1)[0];
   }
 
   public AddNewRecipe(element: Recipe): void {

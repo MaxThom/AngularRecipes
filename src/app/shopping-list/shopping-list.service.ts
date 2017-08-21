@@ -33,8 +33,10 @@ export class ShoppingListService {
   private AddIng(element: Ingredient): void {
 
     let temp: Ingredient = this.ingredients.find(x => x.name === element.name);
-    if (temp == null)
-      this.ingredients.push(element);
+    if (temp == null) {
+      const ing = new Ingredient(element.name, element.amount);
+      this.ingredients.push(ing);
+    }
     else
       temp.amount += element.amount;
 

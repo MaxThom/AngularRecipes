@@ -12,21 +12,21 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class RecipeDetailComponent implements OnInit {
  recipe: Recipe;
  id: number;
-  constructor(private IngredientData: ShoppingListService, private recipeData: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private shoppingListService: ShoppingListService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
-      this.recipe = this.recipeData.GetRecipe(+params['id']);
+      this.recipe = this.recipeService.GetRecipe(+params['id']);
     });
   }
 
   SendIngredients() {
-    this.IngredientData.AddListIngredients(this.recipe.ingredients);
+    this.shoppingListService.AddListIngredients(this.recipe.ingredients);
   }
 
   DeleteRecipe(): void {
-    this.recipeData.DeleteRecipe(this.id);
+    this.recipeService.DeleteRecipe(this.id);
     this.router.navigate(['recipes']);
   }
 
