@@ -3,13 +3,14 @@ import { RecipeStorageService } from '../../recipes/recipe-entities/recipe-stora
 import { Response } from '@angular/http';
 import { AuthService } from '../../auth/auth.service';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  menuOpened: boolean = false;
 
   constructor(private recipeStorageService: RecipeStorageService, private authService: AuthService) { }
 
