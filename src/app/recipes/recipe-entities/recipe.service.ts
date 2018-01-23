@@ -31,7 +31,7 @@ export class RecipeService {
   public AddNewRecipe(element: Recipe): void {
     this.recipes.push(element);
 
-    this.refreshRecipe.next(this.recipes);
+      this.refreshRecipe.next(this.recipes);
   }
 
   public UpdateRecipe(id: number, element: Recipe): void {

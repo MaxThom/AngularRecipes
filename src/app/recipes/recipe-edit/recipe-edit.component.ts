@@ -17,9 +17,6 @@ export class RecipeEditComponent implements OnInit {
   recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute, private RecipeService: RecipeService, private router: Router) {
-
-
-
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
