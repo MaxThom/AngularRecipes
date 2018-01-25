@@ -15,11 +15,34 @@ const initialState = {
 export function shoppingListReducer(state = initialState, action: ShoppingListActions.ShoppingListActions) {
   switch (action.type) {
     case reducerActions.ADD_INGREDIENT:
+      AddIng(state, action.payload);
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload]
+        ingredients: [...state.ingredients]
+      }
+    case reducerActions.ADD_INGREDIENTS:
+      AddListIngredients(state, action.payload);
+      return {
+        ...state,
+        ingredients: [...state.ingredients]
       }
     default:
       return state;
+  }
+}
+
+function AddListIngredients(state: any, list: Ingredient[]): void {
+  for (const ing of list) {
+    AddIng(state, ing);
+  }
+}
+
+function AddIng(state: any, element: Ingredient): void {
+  const temp: Ingredient = state.ingredients.find(x => x.name === element.name);
+  if (temp == null) {
+    const ing = new Ingredient(element.name, element.amount);
+    state.ingredients.push(ing);
+  } else {
+    temp.amount += element.amount;
   }
 }
