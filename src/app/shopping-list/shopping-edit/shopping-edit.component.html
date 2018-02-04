@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-xs-12">
             <button class="btn btn-success" type="submit" [disabled]="!ingredientForm.valid">Add</button>
-            <button class="btn btn-danger" type="button" (click)="OnDeleteItem()">Delete Item</button>
+            <button class="btn btn-danger" type="button" [disabled]="!editMode" (click)="OnDeleteItem()">Delete Item</button>
             <button class="btn btn-primary" type="button" (click)="OnClear()">Clear</button>
           </div>
         </div>
